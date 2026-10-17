@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { Lock, Mail, ArrowRight, ShieldCheck, Eye, EyeOff } from 'lucide-react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { Lock, Mail, ArrowRight, Eye, EyeOff } from 'lucide-react'
 import { toast } from 'sonner'
 import { useAuthStore } from '../../store/authStore'
 import { authService } from '../../services/api/authService'
@@ -52,12 +52,10 @@ export default function Connexion() {
         throw new Error('Réponse de connexion invalide.')
       }
     } catch (error) {
-      // Si le backend n'est pas encore démarré en local, proposition d'accès démo administrateur
       const isNetworkError = !error.response || error.code === 'ERR_NETWORK'
       if (isNetworkError) {
-        toast.warning(
-          "Backend non joignable. Cliquez sur 'Connexion Démo Admin' ci-dessous pour tester l'espace d'administration.",
-          { duration: 5000 }
+        toast.error(
+          'Serveur inaccessible. Veuillez vérifier votre connexion ou réessayer plus tard.'
         )
       } else {
         const errorMsg =
@@ -67,18 +65,6 @@ export default function Connexion() {
     } finally {
       setIsLoading(false)
     }
-  }
-
-  // Connexion rapide pour environnement de développement / test
-  const handleDemoAdminLogin = () => {
-    setSession('fake-jwt-token-fl-structures-demo', {
-      id: 'usr-admin-demo',
-      email: 'admin@fl-structures.ci',
-      nom: 'Jean-Marc Kouassi',
-      role: 'admin',
-    })
-    toast.success('Connecté en tant qu’Administrateur Démo.')
-    navigate(from, { replace: true })
   }
 
   return (
@@ -170,28 +156,6 @@ export default function Connexion() {
             )}
           </button>
         </form>
-
-        {/* Option Connexion Démo Admin pour test immédiat */}
-        <div className="pt-4 border-t border-zinc-200/80 dark:border-zinc-800">
-          <button
-            type="button"
-            onClick={handleDemoAdminLogin}
-            className="w-full py-2.5 px-3 rounded-lg text-xs font-semibold text-zinc-700 dark:text-zinc-300 bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 transition-colors flex items-center justify-center gap-2 border border-zinc-200 dark:border-zinc-700"
-          >
-            <ShieldCheck size={15} className="text-[#C0392B]" />
-            <span>Tester avec la session Démo Admin</span>
-          </button>
-        </div>
-
-        {/* Retour au site public */}
-        <div className="text-center">
-          <Link
-            to="/"
-            className="text-xs text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200 transition-colors"
-          >
-            ← Retourner au site vitrine
-          </Link>
-        </div>
       </div>
     </div>
   )
