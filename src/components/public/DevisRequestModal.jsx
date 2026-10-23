@@ -161,6 +161,26 @@ export default function DevisRequestModal() {
     if (fileInputRef.current) fileInputRef.current.value = ''
   }
 
+  // Blocage physique strict des lettres et caractères interdits sur le téléphone
+  const handlePhoneKeyDown = (e) => {
+    const allowedKeys = [
+      'Backspace',
+      'Delete',
+      'ArrowLeft',
+      'ArrowRight',
+      'Tab',
+      'Enter',
+      'Home',
+      'End',
+    ]
+    if (allowedKeys.includes(e.key)) return
+    if (e.ctrlKey || e.metaKey) return
+    // N'autorise que les chiffres 0-9, le +, l'espace, les parenthèses et le tiret
+    if (!/[0-9+\s().-]/.test(e.key)) {
+      e.preventDefault()
+    }
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
 
@@ -172,7 +192,12 @@ export default function DevisRequestModal() {
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
       newErrors.email = 'Format d’email invalide.'
     }
-    if (!form.telephone.trim()) newErrors.telephone = 'Le numéro de téléphone est obligatoire.'
+    const phoneDigits = (form.telephone || '').replace(/\D/g, '')
+    if (!form.telephone.trim()) {
+      newErrors.telephone = 'Le numéro de téléphone direct est obligatoire.'
+    } else if (phoneDigits.length < 8) {
+      newErrors.telephone = 'Le numéro de téléphone doit comporter au moins 8 chiffres valides.'
+    }
     if (!form.type_besoin.trim()) newErrors.type_besoin = 'Veuillez préciser la nature de votre besoin.'
     if (!form.site_minier.trim()) newErrors.site_minier = 'Le site ou la localité est obligatoire.'
 
@@ -346,8 +371,11 @@ export default function DevisRequestModal() {
                     required
                     placeholder="ex: +225 07 00 00 00"
                     value={form.telephone}
+                    onKeyDown={handlePhoneKeyDown}
                     onChange={(e) => {
-                      setForm((prev) => ({ ...prev, telephone: e.target.value }))
+                      // Nettoie automatiquement tout caractère interdit (même en copier-coller)
+                      const cleaned = e.target.value.replace(/[^0-9+\s().-]/g, '')
+                      setForm((prev) => ({ ...prev, telephone: cleaned }))
                       if (errors.telephone) setErrors((prev) => ({ ...prev, telephone: null }))
                     }}
                     className={`w-full h-11 pl-10 pr-3.5 text-xs bg-white border rounded-xl text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-red/20 transition-all ${

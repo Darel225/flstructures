@@ -142,6 +142,24 @@ export default function PartenaireRequestModal() {
     if (fileInputRef.current) fileInputRef.current.value = ''
   }
 
+  const handlePhoneKeyDown = (e) => {
+    const allowedKeys = [
+      'Backspace',
+      'Delete',
+      'ArrowLeft',
+      'ArrowRight',
+      'Tab',
+      'Enter',
+      'Home',
+      'End',
+    ]
+    if (allowedKeys.includes(e.key)) return
+    if (e.ctrlKey || e.metaKey) return
+    if (!/[0-9+\s().-]/.test(e.key)) {
+      e.preventDefault()
+    }
+  }
+
   const validate = () => {
     const newErrors = {}
     if (!form.societe.trim()) {
@@ -333,6 +351,7 @@ export default function PartenaireRequestModal() {
                   type="tel"
                   placeholder="Ex: +225... / +221... / +33... / +226..."
                   value={form.telephone}
+                  onKeyDown={handlePhoneKeyDown}
                   onChange={(e) => {
                     const cleaned = e.target.value.replace(/[^0-9+\s().-]/g, '')
                     setForm((prev) => ({ ...prev, telephone: cleaned }))
