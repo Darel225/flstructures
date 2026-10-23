@@ -13,6 +13,8 @@ import {
   Loader2,
   ArrowRight,
   ShieldCheck,
+  ChevronDown,
+  Check,
 } from 'lucide-react'
 import { toast } from 'sonner'
 import { useDevisModal } from '../../store/devisModalStore'
@@ -20,12 +22,12 @@ import devisService from '../../services/api/devis.service'
 import { syncCrmMetrics } from '../../services/api/crmQuerySync'
 
 const BESOIN_OPTIONS = [
-  'Base-vie modulaire (dortoirs, réfectoire, sanitaires)',
-  'Hangar de maintenance & atelier grande portée',
-  'Dômes & abris industriels métallo-textiles',
-  'Conteneurs aménagés (bureaux, magasins sécurisés)',
-  'Chambres VIP & hébergement cadres miniers',
-  'Autre structure modulaire sur mesure',
+  'Approvisionnement alimentaire complet selon mercuriale',
+  'Denrées sèches & Épicerie de base',
+  'Produits frais, Fruits & Légumes (température dirigée)',
+  'Viandes, Volailles & Surgelés (-25°C)',
+  'Boissons & Consommables de restauration collective',
+  'Coordination logistique & Livraison sécurisée sur site minier',
 ]
 
 const MAX_FILE_SIZE_BYTES = 25 * 1024 * 1024 // 25 Mo
@@ -34,6 +36,9 @@ export default function DevisRequestModal() {
   const { isOpen, closeDevisModal, initialData } = useDevisModal()
   const queryClient = useQueryClient()
   const fileInputRef = useRef(null)
+  const dropdownRef = useRef(null)
+
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
   const [form, setForm] = useState({
     societe: '',
@@ -68,16 +73,29 @@ export default function DevisRequestModal() {
         file_size_formatted: '',
       })
       setErrors({})
+      setIsDropdownOpen(false)
       // Empêche le défilement de fond
       document.body.style.overflow = 'hidden'
     } else {
       document.body.style.overflow = ''
+      setIsDropdownOpen(false)
     }
 
     return () => {
       document.body.style.overflow = ''
     }
   }, [isOpen, initialData])
+
+  // Fermeture du dropdown au clic en dehors
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setIsDropdownOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
 
   // Fermeture sur touche Échap
   useEffect(() => {
@@ -215,7 +233,7 @@ export default function DevisRequestModal() {
             id="devis-modal-title"
             className="font-heading font-extrabold text-xl sm:text-2xl text-brand-black tracking-tight"
           >
-            Structures & Logistique Minière
+            Approvisionnement & Logistique Alimentaire
           </h2>
           <p className="text-xs sm:text-[0.8125rem] text-gray-600 mt-1 leading-relaxed">
             Recevez une proposition technique et tarifaire sur mesure sous 24 à 48h ouvrées.
@@ -347,35 +365,72 @@ export default function DevisRequestModal() {
             <div className="flex items-center gap-2 pb-1.5 border-b border-gray-100">
               <Layers size={15} className="text-brand-red" />
               <h3 className="text-[0.72rem] font-heading font-bold uppercase tracking-wider text-gray-500">
-                2. Nature du Projet & Localité
+                2. Nature du Besoin & Destination
               </h3>
             </div>
 
-            {/* Type de besoin */}
-            <div>
+            {/* Type de besoin avec vrai menu déroulant + saisie libre */}
+            <div ref={dropdownRef} className="relative">
               <label className="block text-xs font-semibold text-gray-800 mb-1.5">
                 Type de Besoin / Nature du projet <span className="text-brand-red">*</span>
               </label>
               <div className="relative">
                 <input
                   type="text"
-                  list="besoins-list"
                   required
-                  placeholder="Sélectionnez ou décrivez votre besoin (ex: Base-vie, Hangar, Dômes, Conteneurs...)"
+                  placeholder="Sélectionnez ou décrivez vos besoins (ex: Vivres frais, Surgelés...)"
                   value={form.type_besoin}
+                  onFocus={() => setIsDropdownOpen(true)}
                   onChange={(e) => {
                     setForm((prev) => ({ ...prev, type_besoin: e.target.value }))
                     if (errors.type_besoin) setErrors((prev) => ({ ...prev, type_besoin: null }))
                   }}
-                  className={`w-full h-11 px-3.5 text-xs bg-white border rounded-xl text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-red/20 transition-all ${
+                  className={`w-full h-11 pl-3.5 pr-10 text-xs bg-white border rounded-xl text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-red/20 transition-all ${
                     errors.type_besoin ? 'border-red-500 bg-red-50/20' : 'border-gray-200 focus:border-brand-red'
                   }`}
                 />
-                <datalist id="besoins-list">
-                  {BESOIN_OPTIONS.map((opt) => (
-                    <option key={opt} value={opt} />
-                  ))}
-                </datalist>
+                {/* Bouton flèche toujours cliquable qui ouvre/ferme la liste */}
+                <button
+                  type="button"
+                  onClick={() => setIsDropdownOpen((prev) => !prev)}
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 p-1 text-gray-400 hover:text-gray-700 transition-colors cursor-pointer"
+                  title="Afficher les suggestions"
+                >
+                  <ChevronDown
+                    size={16}
+                    className={`transition-transform duration-200 ${isDropdownOpen ? 'rotate-180 text-brand-red' : ''}`}
+                  />
+                </button>
+                {/* Vraie liste déroulante stylisée */}
+                {isDropdownOpen && (
+                  <div className="absolute left-0 right-0 top-full mt-1.5 bg-white border border-gray-200 rounded-2xl shadow-xl z-50 overflow-hidden py-1.5 max-h-60 overflow-y-auto animate-in fade-in zoom-in-95 duration-150">
+                    <div className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-gray-400 border-b border-gray-100">
+                      Suggestions d'approvisionnement (ou saisissez librement) :
+                    </div>
+                    {BESOIN_OPTIONS.map((opt) => {
+                      const isSelected = form.type_besoin === opt
+                      return (
+                        <button
+                          key={opt}
+                          type="button"
+                          onClick={() => {
+                            setForm((prev) => ({ ...prev, type_besoin: opt }))
+                            if (errors.type_besoin) setErrors((prev) => ({ ...prev, type_besoin: null }))
+                            setIsDropdownOpen(false)
+                          }}
+                          className={`w-full text-left px-3.5 py-2.5 text-xs flex items-center justify-between transition-colors cursor-pointer ${
+                            isSelected
+                              ? 'bg-red-50 text-brand-red font-semibold'
+                              : 'text-gray-700 hover:bg-gray-50 hover:text-brand-black'
+                          }`}
+                        >
+                          <span>{opt}</span>
+                          {isSelected && <Check size={14} className="text-brand-red shrink-0" />}
+                        </button>
+                      )
+                    })}
+                  </div>
+                )}
               </div>
               {errors.type_besoin && <p className="text-[11px] text-red-600 mt-1">{errors.type_besoin}</p>}
             </div>
@@ -391,7 +446,7 @@ export default function DevisRequestModal() {
                   <input
                     type="text"
                     required
-                    placeholder="ex: Tongon Nord, Ity, Yaouré..."
+                    placeholder="ex: Tongon, Ity, Yaouré, Bonikro, Abidjan..."
                     value={form.site_minier}
                     onChange={(e) => {
                       setForm((prev) => ({ ...prev, site_minier: e.target.value }))
@@ -412,7 +467,7 @@ export default function DevisRequestModal() {
                 </label>
                 <input
                   type="text"
-                  placeholder="ex: 50 modules - Phase 1"
+                  placeholder="ex: 10 tonnes / mois, 500 rations/jour, livraison bi-hebdomadaire..."
                   value={form.volume_frequence}
                   onChange={(e) => setForm((prev) => ({ ...prev, volume_frequence: e.target.value }))}
                   className="w-full h-11 px-3.5 text-xs bg-white border border-gray-200 rounded-xl text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-brand-red focus:ring-2 focus:ring-brand-red/20 transition-all"
@@ -426,7 +481,7 @@ export default function DevisRequestModal() {
             <div className="flex items-center gap-2 pb-1.5 border-b border-gray-100">
               <Paperclip size={15} className="text-brand-red" />
               <h3 className="text-[0.72rem] font-heading font-bold uppercase tracking-wider text-gray-500">
-                3. Cahier des charges ou Plans (Optionnel)
+                3. Mercuriale, Liste de Denrées ou Cahier des charges (Optionnel)
               </h3>
             </div>
 
@@ -494,10 +549,10 @@ export default function DevisRequestModal() {
                 <div className="flex flex-col items-center gap-1.5">
                   <Paperclip size={22} className="text-gray-400" />
                   <span className="text-xs font-semibold text-gray-800">
-                    <span className="text-brand-red">Joindre un document</span> ou plan (PDF, Word, Plans max 25 Mo)
+                    <span className="text-brand-red">Joindre votre mercuriale</span> ou document (Excel, PDF, Word max 25 Mo)
                   </span>
                   <span className="text-[11px] text-gray-500">
-                    Glissez-déposez votre CCTP ou cliquez pour parcourir
+                    Glissez-déposez votre fichier de mercuriale ou cliquez pour parcourir
                   </span>
                 </div>
               </div>

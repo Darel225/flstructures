@@ -1,4 +1,4 @@
-﻿import { useState, useMemo } from 'react'
+import { useState, useMemo } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import {
   ProjetsIcon,
@@ -15,7 +15,7 @@ import {
 import { toast } from 'sonner'
 
 import realisationService from '../../../services/api/realisation.service'
-import { resolveImageUrl, handleImageError } from '../../../utils/imageUrl'
+import { resolveImageUrl } from '../../../utils/imageUrl'
 import DataTable from '../../../components/admin/ui/DataTable'
 import TablePagination from '../../../components/admin/ui/TablePagination'
 import SlideOverDrawer from '../../../components/admin/ui/SlideOverDrawer'

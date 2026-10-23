@@ -1,4 +1,4 @@
-﻿import { useState } from 'react'
+import { useState } from 'react'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import {
   Mail,
@@ -507,7 +507,7 @@ export default function ContactPage() {
                   <div>
                     <h3 className="text-xs font-bold uppercase tracking-wider text-gray-500">Siège Social & Plateforme Logistique</h3>
                     <p className="text-xs sm:text-sm font-semibold text-[#111111] mt-1">
-                      Zone Industrielle & Portuaire, Boulevard de Vridi, Abidjan, Côte d&apos;Ivoire
+                      Marcory Zone 4, Abidjan, Côte d&apos;Ivoire
                     </p>
                     <p className="text-[11px] text-gray-500 mt-0.5">
                       Interventions et déploiements sur sites miniers dans toute l&apos;Afrique de l&apos;Ouest.
@@ -540,23 +540,23 @@ export default function ContactPage() {
                 <div className="flex items-center gap-2 mb-3 px-1">
                   <MapPin size={16} className="text-[#C0392B]" />
                   <span className="text-xs font-bold uppercase tracking-wider text-[#111111]">
-                    Localisation Officielle (Vridi - Abidjan)
+                    Localisation Officielle (Marcory Zone 4 - Abidjan)
                   </span>
                 </div>
                 <div className="relative w-full h-56 sm:h-64 rounded-2xl overflow-hidden border border-[#E8E4DF] bg-gray-100">
                   <iframe
-                    title="Carte de localisation FL STRUCTURES Vridi Abidjan"
+                    title="Carte de localisation FL STRUCTURES Marcory Zone 4 Abidjan"
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
                     loading="lazy"
-                    src="https://www.openstreetmap.org/export/embed.html?bbox=-4.0300%2C5.2350%2C-3.9900%2C5.2750&layer=mapnik&marker=5.2550%2C-4.0100"
+                    src="https://www.openstreetmap.org/export/embed.html?bbox=-4.0050%2C5.2950%2C-3.9750%2C5.3150&layer=mapnik&marker=5.3030%2C-3.9900"
                   />
                 </div>
                 <div className="mt-2.5 flex items-center justify-between text-[11px] text-gray-500 px-1">
-                  <span>Accès camions lourds & convois exceptionnels</span>
+                  <span>Accès aisé & proximité axes logistiques</span>
                   <a
-                    href="https://www.openstreetmap.org/?mlat=5.2550&mlon=-4.0100#map=15/5.2550/-4.0100"
+                    href="https://www.openstreetmap.org/?mlat=5.3030&mlon=-3.9900#map=15/5.3030/-3.9900"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-[#C0392B] hover:underline font-semibold"

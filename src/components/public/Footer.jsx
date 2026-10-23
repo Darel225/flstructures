@@ -71,6 +71,7 @@ export default function Footer() {
                 { to: '/a-propos', label: 'À propos' },
                 { to: '/services', label: 'Nos services' },
                 { to: '/produits', label: 'Nos produits' },
+                { to: '/realisations', label: 'Réalisations' },
                 { to: '/hebergement', label: 'Hébergement corporate' },
               ].map((item) => (
                 <li key={item.to}>
@@ -108,7 +109,7 @@ export default function Footer() {
                 </span>
               </li>
 
-              {/* Email / Demande d'informations */}
+              {/* Email officiel */}
               <li className="flex items-center gap-3 group">
                 <div className="h-8 w-8 rounded-sm bg-white/5 border border-white/10 text-brand-red flex items-center justify-center shrink-0 transition-colors duration-200 group-hover:border-brand-red/30 group-hover:bg-brand-red/10">
                   <Mail className="h-3.5 w-3.5" />
@@ -116,17 +117,17 @@ export default function Footer() {
                 {displayEmail ? (
                   <a
                     href={`mailto:${displayEmail}`}
-                    className="text-[0.84rem] text-gray-400 hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red rounded-xs"
+                    className="text-[0.84rem] text-gray-400 hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red rounded-xs truncate"
                   >
-                    Demande d'informations
+                    {displayEmail}
                   </a>
                 ) : (
-                  <Link
-                    to="/contact"
-                    className="text-[0.84rem] text-gray-400 hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red rounded-xs"
+                  <a
+                    href="mailto:contact@fl-structures.ci"
+                    className="text-[0.84rem] text-gray-400 hover:text-white transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red rounded-xs truncate"
                   >
-                    Demande d'informations
-                  </Link>
+                    contact@fl-structures.ci
+                  </a>
                 )}
               </li>
 

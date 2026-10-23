@@ -1,29 +1,30 @@
-import { ShieldCheck, ArrowRight, FileCheck, CheckCircle2, Wrench, Truck, Cpu, HardHat } from 'lucide-react'
+import { ShieldCheck, ArrowRight, FileCheck, CheckCircle2, Truck, Leaf, Snowflake, Package } from 'lucide-react'
 import { usePartenaireModal } from '../../store/partenaireModalStore'
+import bgPartenaireHero from '../../assets/images/partenaire-hero.jpg'
 
 export default function Partenaire() {
   const { openPartenaireModal } = usePartenaireModal()
 
   const domaines = [
     {
+      icon: <Leaf className="text-[#C0392B]" size={24} />,
+      title: 'Filières Agricoles & Vivres Frais',
+      desc: 'Coopératives maraîchères locales, fruits, légumes et tubercules sous contrôle qualité rigoureux.',
+    },
+    {
+      icon: <Snowflake className="text-[#C0392B]" size={24} />,
+      title: 'Viandes, Volailles & Surgelés',
+      desc: 'Abattoirs agréés, éleveurs et produits carnés/maritimes sous chaîne du froid stricte (-25°C).',
+    },
+    {
+      icon: <Package className="text-[#C0392B]" size={24} />,
+      title: 'Denrées Sèches & Épicerie',
+      desc: 'Grossistes et importateurs de riz, huiles, farines, sucres, conserves et denrées de base.',
+    },
+    {
       icon: <Truck className="text-[#C0392B]" size={24} />,
-      title: 'Transport Spécial & Fret Lourd',
-      desc: 'Porte-chars, plateaux surbaissés, transport sécurisé vers les mines reculées.',
-    },
-    {
-      icon: <HardHat className="text-[#C0392B]" size={24} />,
-      title: 'Levage, Manutention & Grues',
-      desc: 'Grues tout-terrain 50T-120T, chariots télescopiques, équipes de grutage certifiées.',
-    },
-    {
-      icon: <Wrench className="text-[#C0392B]" size={24} />,
-      title: 'Génie Civil & Plateformes',
-      desc: 'Coulage de radiers, plots béton, nivellement et terrassement préliminaire.',
-    },
-    {
-      icon: <Cpu className="text-[#C0392B]" size={24} />,
-      title: 'Énergies & Froid Industriel',
-      desc: 'Centrales solaires hybrides, groupes électrogènes, climatisation industrielle.',
+      title: 'Transport Frigo & Logistique',
+      desc: 'Flottes frigorifiques sous température dirigée et transporteurs équipés pour pistes minières.',
     },
   ]
 
@@ -31,8 +32,8 @@ export default function Partenaire() {
     'Registre de Commerce (RCCM / Kbis à jour)',
     'Déclaration Fiscale d’Existence (DFE) & Attestation de Régularité Fiscale',
     'Attestation d’Assurance Responsabilité Civile Professionnelle',
-    'Plaquette de présentation des équipements & habilitations HSE',
-    'Bordereau des principales références de chantiers industriels/miniers',
+    'Certificats Sanitaires, Normes d’Hygiène & Traçabilité (HACCP)',
+    'Bordereau de références commerciales (Restauration collective, Grands comptes, Sites miniers)',
   ]
 
   return (
@@ -41,22 +42,30 @@ export default function Partenaire() {
       <title>Devenir Partenaire & Fournisseur Agréé | FL STRUCTURES</title>
       <meta
         name="description"
-        content="Rejoignez le panel de sous-traitants et partenaires agréés de FL STRUCTURES pour nos opérations de bases-vie et constructions modulaires minières en Côte d'Ivoire."
+        content="Rejoignez le panel de fournisseurs et partenaires agréés de FL STRUCTURES pour nos opérations d'approvisionnement alimentaire et logistique minière en Côte d'Ivoire."
       />
 
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-[#111111] via-[#1A1A1A] to-[#222222] text-white py-16 md:py-24 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      {/* Hero Section avec image de fond & overlay pro */}
+      <section className="relative bg-brand-black text-white py-20 md:py-28 overflow-hidden min-h-[460px] flex items-center">
+        {/* Image de fond */}
+        <img
+          src={bgPartenaireHero}
+          alt="Partenaires & Fournisseurs FL STRUCTURES"
+          className="absolute inset-0 h-full w-full object-cover object-center pointer-events-none brightness-95"
+        />
+        {/* Dégradé sombre pour lisibilité maximale */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/75 to-black/50 pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-white/90 text-xs font-semibold uppercase tracking-wider backdrop-blur-xs border border-white/10 mb-6">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-white/95 text-xs font-semibold uppercase tracking-wider backdrop-blur-md border border-white/20 mb-6">
               <ShieldCheck size={14} className="text-[#C0392B]" />
-              <span>Portail Achats & Grands Comptes</span>
+              <span>Portail Achats & Sourcing Alimentaire</span>
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">
               Devenez Fournisseur & Partenaire Stratégique
             </h1>
-            <p className="mt-4 text-base sm:text-lg text-gray-300 leading-relaxed font-light">
-              Dans le cadre du déploiement de nos bases-vie modulaires et hangars industriels sur les grands sites miniers de Côte d&apos;Ivoire, FL STRUCTURES sélectionne des prestataires et sous-traitants d&apos;excellence.
+            <p className="mt-4 text-base sm:text-lg text-gray-200 leading-relaxed font-normal">
+              Dans le cadre de l&apos;approvisionnement régulier de nos sites miniers partenaires et des sociétés de restauration collective en Côte d&apos;Ivoire, FL STRUCTURES sélectionne des producteurs, grossistes et transporteurs d&apos;excellence.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-4">
               <button
@@ -113,7 +122,7 @@ export default function Partenaire() {
                 Pièces Justificatives pour l&apos;Agrément Fournisseur
               </h2>
               <p className="text-xs sm:text-sm text-gray-600 mb-6 leading-relaxed">
-                Afin de garantir le respect des normes HSE et de conformité exigées par les compagnies minières internationales, votre dossier de candidature doit idéalement regrouper :
+                Afin de garantir le respect des normes sanitaires, HSE et de traçabilité exigées par nos clients miniers et de restauration collective, votre dossier de candidature doit idéalement regrouper :
               </p>
               <ul className="space-y-3">
                 {piecesRequises.map((piece, idx) => (

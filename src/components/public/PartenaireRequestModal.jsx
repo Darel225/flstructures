@@ -20,16 +20,17 @@ import { createPartenaireRequest } from '../../services/api/partenaire.service'
 import { syncCrmMetrics } from '../../services/api/crmQuerySync'
 
 const EXPERTISES_SUGGESTIONS = [
-  'Transport Convois Exceptionnels & Fret Lourd',
-  'Levage, Grutage & Manutention Industrielle',
-  'Climatisation Industrielle & Systèmes CVC',
-  'Génie Civil, Terrassement & VRD',
-  'Électrification Solaire Hybride & Groupes Électrogènes',
-  'Restauration, Économat & Catering de Base-Vie',
-  'Sécurité Incendie, Gardiennage & Vidéosurveillance',
-  'Forage, Hydraulique & Traitement des Eaux',
-  'Maintenance Mécanique & Chaudronnerie',
-  'Fourniture d\'Équipements & Outillage Minier',
+  'Production Maraîchère & Légumes Frais Locaux',
+  'Fruits Frais & Produits Agricoles de Côte d’Ivoire',
+  'Élevage, Abattoir Agréé & Volailles',
+  'Viandes Rouges, Bovins & Porcins',
+  'Poissons, Crustacés & Produits Halieutiques',
+  'Produits Surgelés sous Température Dirigée (-25°C)',
+  'Denrées Sèches, Riz, Huiles & Épicerie de Base',
+  'Transport Frigorifique & Logistique Température Contrôlée',
+  'Transport Routier Tout-Terrain & Pistes Minières',
+  'Conditionnement, Emballages & Consommables Alimentaires',
+  'Contrôle Sanitaire, Analyses & Certification HACCP',
 ]
 
 const MAX_FILE_SIZE_BYTES = 25 * 1024 * 1024 // 25 Mo

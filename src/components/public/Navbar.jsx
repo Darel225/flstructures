@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import ButtonLink from '../common/ButtonLink'
+import { useDevisModal } from '../../store/devisModalStore'
 import logo from '../../assets/images/logo.png'
 
 const NAV_LINKS = [
@@ -14,6 +15,7 @@ const NAV_LINKS = [
 ]
 
 export default function Navbar() {
+  const { openDevisModal } = useDevisModal()
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
@@ -89,15 +91,13 @@ export default function Navbar() {
 
           {/* Mobile (< md) : CTA compact + Burger */}
           <div className="flex md:hidden items-center gap-2">
-            <ButtonLink
-              to="/contact"
-              variant="primary"
-              size="sm"
-              showArrow={false}
-              className="h-9 px-3.5 text-[0.72rem]"
+            <button
+              type="button"
+              onClick={() => openDevisModal()}
+              className="h-9 px-3.5 text-[0.72rem] font-heading font-bold uppercase tracking-wider text-white bg-brand-red hover:bg-brand-red-dark rounded-md transition-colors cursor-pointer"
             >
               DEVIS
-            </ButtonLink>
+            </button>
 
             <button
               type="button"
@@ -164,6 +164,20 @@ export default function Navbar() {
                 {link.name}
               </NavLink>
             ))}
+
+            <NavLink
+              to="/contact"
+              onClick={closeMenu}
+              className={({ isActive }) =>
+                `min-h-11 flex items-center px-3 font-heading font-bold text-[0.78rem] tracking-[0.08em] uppercase rounded-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red ${
+                  isActive
+                    ? 'text-brand-red bg-brand-cream/60'
+                    : 'text-brand-black hover:bg-gray-50 hover:text-brand-red'
+                }`
+              }
+            >
+              CONTACT
+            </NavLink>
           </nav>
 
           {/* Sélecteur FR | EN Mobile */}

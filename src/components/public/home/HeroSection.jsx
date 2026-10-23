@@ -7,10 +7,10 @@ import bgHero from '../../../assets/images/hero-mines1.webp'
 const EASE = 'cubic-bezier(0.22, 1, 0.36, 1)'
 
 const HERO_CONTENT = {
-  badge: "CÔTE D'IVOIRE • LOGISTIQUE MINIÈRE & BASES-VIE",
+  badge: "CÔTE D'IVOIRE • SITES MINIERS & RESTAURATION COLLECTIVE",
   titlePart1: 'Votre partenaire ',
   titleHighlight: "d'approvisionnement et de logistique",
-  titlePart2: ' alimentaire pour les sites miniers',
+  titlePart2: ' alimentaire pour sites miniers et restauration collective',
   subtitle:
     "Continuité d'approvisionnement, qualité, ponctualité et proximité terrain.",
   ctaPrimary: 'DEMANDER UN DEVIS',
@@ -111,7 +111,7 @@ export default function HeroSection() {
           >
             <ButtonLink
               onClick={() =>
-                openDevisModal({ type_besoin: 'Logistique & Approvisionnement Minier' })
+                openDevisModal({ type_besoin: 'Approvisionnement alimentaire complet selon mercuriale' })
               }
               variant="primary"
               size="md"

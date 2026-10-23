@@ -11,7 +11,7 @@ import imgTerrainDefault from '../../../assets/images/Humaine.png'
 // Pilier 02 - Plateformes : Espace de stockage / entrepôt de denrées
 import imgStockageDefault from '../../../assets/images/Stockage.jpg'
 // Pilier 03 - Convois & Matériel : Flotte de camions / transport adapté
-import imgLogistiqueDefault from '../../../assets/images/expertise-logistique2.jpg'
+import imgLogistiqueDefault from '../../../assets/images/flotte-logistique.jpg'
 
 const CAPABILITIES_IMAGES = {
   rhTerrain: imgTerrainDefault,

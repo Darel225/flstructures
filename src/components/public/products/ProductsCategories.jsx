@@ -13,7 +13,7 @@ import imgFruitsFallback from '../../../assets/images/expertise-gamme.jpg'
 import imgViandesFallback from '../../../assets/images/expertise-gamme.png'
 import imgBoissonsFallback from '../../../assets/images/expertise-logistique.png'
 import imgEntretienFallback from '../../../assets/images/expertise-logistique.jpg'
-import imgSurMesureImage from '../../../assets/images/about-security.jpg'
+import imgSurMesureImage from '../../../assets/images/mercuriale-stock.jpg'
 
 const CATEGORIES_FALLBACK = [
   {
