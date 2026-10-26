@@ -1,7 +1,7 @@
 // PROVISIONAL CONTENT - TO BE VALIDATED BY CLIENT
 import { useEffect, useRef, useState } from 'react'
 import { Check, ClipboardCheck, Snowflake } from 'lucide-react'
-import securityImg from '../../../assets/images/2.png'
+import securityImg from '../../../assets/images/services-qualite-haccp.jpg'
 
 const SECURITY_CONTENT = {
   tag: 'SÉCURITÉ ALIMENTAIRE',
@@ -235,13 +235,12 @@ export default function AboutSecurity() {
 
                     {/* Milestone */}
                     <span
-                      className={`absolute left-0 top-4 flex h-9 w-9 items-center justify-center rounded-full border-2 font-heading text-[0.6875rem] font-bold transition-all duration-500 ${
-                        done
+                      className={`absolute left-0 top-4 flex h-9 w-9 items-center justify-center rounded-full border-2 font-heading text-[0.6875rem] font-bold transition-all duration-500 ${done
                           ? 'border-brand-red bg-brand-red text-white'
                           : current
                             ? 'scale-110 border-brand-red bg-white text-brand-red shadow-md shadow-brand-red/20'
                             : 'border-gray-300 bg-white text-gray-400'
-                      }`}
+                        }`}
                     >
                       {done ? <Check size={15} strokeWidth={3} aria-hidden="true" /> : step.num}
                     </span>
@@ -252,23 +251,20 @@ export default function AboutSecurity() {
                       onClick={() => setActive(i)}
                       onMouseEnter={() => setActive(i)}
                       onFocus={() => setActive(i)}
-                      className={`w-full rounded-xl border px-5 py-4 text-left transition-all duration-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red ${
-                        current
+                      className={`w-full rounded-xl border px-5 py-4 text-left transition-all duration-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-red ${current
                           ? 'border-gray-200 bg-brand-cream/70 shadow-md'
                           : 'border-transparent hover:bg-gray-50/80'
-                      }`}
+                        }`}
                     >
                       <h3
-                        className={`font-heading text-[0.875rem] font-bold tracking-[0.02em] transition-colors duration-300 ${
-                          current ? 'text-brand-black' : 'text-gray-500'
-                        }`}
+                        className={`font-heading text-[0.875rem] font-bold tracking-[0.02em] transition-colors duration-300 ${current ? 'text-brand-black' : 'text-gray-500'
+                          }`}
                       >
                         {step.title}
                       </h3>
                       <p
-                        className={`mt-1.5 text-[0.8125rem] leading-[1.65] transition-colors duration-300 ${
-                          current ? 'text-gray-600' : 'text-gray-500'
-                        }`}
+                        className={`mt-1.5 text-[0.8125rem] leading-[1.65] transition-colors duration-300 ${current ? 'text-gray-600' : 'text-gray-500'
+                          }`}
                       >
                         {step.description}
                       </p>

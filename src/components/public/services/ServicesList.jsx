@@ -8,8 +8,8 @@ import ButtonLink from '../../common/ButtonLink'
 // ---------------------------------------------------------------------------
 import imgSourcingProvisoire from '../../../assets/images/Approvisionnement.webp'
 import imgStocksProvisoire from '../../../assets/images/8.png'
-import imgLivraisonProvisoire from '../../../assets/images/Livraison.jpg'
-import imgQualiteProvisoire from '../../../assets/images/2.png'
+import imgLivraisonProvisoire from '../../../assets/images/services-livraison-ci.jpg'
+import imgQualiteProvisoire from '../../../assets/images/services-qualite-haccp.jpg'
 import imgSurMesureProvisoire from '../../../assets/images/Logistique.jpg'
 
 const SERVICES_IMAGES = {

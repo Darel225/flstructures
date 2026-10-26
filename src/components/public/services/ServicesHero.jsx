@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 // ---------------------------------------------------------------------------
 // IMAGE DU HERO (Remplaçable par services-hero.png dès ajout dans src/assets/images/)
 // ---------------------------------------------------------------------------
-import heroMinesFallback from '../../../assets/images/5.png'
+import heroMinesFallback from '../../../assets/images/services-hero-equipe.jpg'
 
 const SERVICES_HERO_IMAGE = heroMinesFallback
 
